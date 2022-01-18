@@ -18,7 +18,7 @@ class Grid extends StatelessWidget {
         padding: EdgeInsets.all(8.0),
         child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
+              crossAxisCount: 3,
               mainAxisSpacing: 5,
               crossAxisSpacing: 5,
             ),
