@@ -53,10 +53,28 @@ class _BoardState extends State<Board> {
     );
   }
 
+  int vccConnectGND = 0;
+
   void clickGrid(index) {
     if (secondsPassed == 0) {
       isActive = true;
     }
+    /******* At position 0 & 1 *******/
+    if (numbers[index] == 1 && index - 1 == 0 ||
+        numbers[index] == 1 && index - 3 == 0) {
+      vccConnectGND += 1;
+    }
+    if (numbers[index] == 5 && index - 1 == 1 ||
+        numbers[index] == 5 && index + 1 == 1 ||
+        numbers[index] == 5 && index - 3 == 1) {
+      vccConnectGND += 1;
+    }
+    print(vccConnectGND);
+    if (vccConnectGND >= 2) {
+      print("burned");
+      vccConnectGND = 0;
+    }
+
     if (index - 1 >= 0 && numbers[index - 1] == 0 && index % 3 != 0 ||
         index + 1 < 9 && numbers[index + 1] == 0 && (index + 1) % 3 != 0 ||
         (index - 3 >= 0 && numbers[index - 3] == 0) ||
