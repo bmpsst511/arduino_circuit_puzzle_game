@@ -7,7 +7,8 @@ class GridButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    var figureIndex = int.parse(text);
+    /* return RaisedButton(
       child: Text(
         text,
         style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -16,6 +17,21 @@ class GridButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
+      onPressed: click,
+    );
+  } */
+    return MaterialButton(
+      padding: EdgeInsets.all(8.0),
+      textColor: Colors.white,
+      splashColor: Colors.greenAccent,
+      elevation: 8.0,
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('Block_${figureIndex}.png'), fit: BoxFit.cover),
+        ),
+      ),
+      // ),
       onPressed: click,
     );
   }
