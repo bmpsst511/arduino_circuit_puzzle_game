@@ -53,27 +53,57 @@ class _BoardState extends State<Board> {
     );
   }
 
-  int vccConnectGND = 0;
+  bool blank0empty = false;
+  bool blank1empty = false;
+  bool mcuVccAt0 = false;
+  bool imuGndAt1 = false;
 
   void clickGrid(index) {
     if (secondsPassed == 0) {
       isActive = true;
     }
-    /******* At position 0 & 1 *******/
-    if (numbers[index] == 1 && index - 1 == 0 ||
-        numbers[index] == 1 && index - 3 == 0) {
-      vccConnectGND += 1;
+
+    /******* MCUVCC at blank 0 *******/
+    //先判斷位置0是否是空的!
+    if (index == 0) {
+      blank0empty = true;
     }
-    if (numbers[index] == 5 && index - 1 == 1 ||
-        numbers[index] == 5 && index + 1 == 1 ||
-        numbers[index] == 5 && index - 3 == 1) {
-      vccConnectGND += 1;
+
+    //當MCUVCC在第1格或者第4格，第0格又是空的，那下一步，MCUVCC必定在第0格！
+    if ("${numbers[index]} from $index" == "1 from 1" ||
+        "${numbers[index]} from $index" == "1 from 3") {
+      if (blank0empty) {
+        print("MCUVCC at 0");
+        mcuVccAt0 = true;
+      }
     }
-    print(vccConnectGND);
-    if (vccConnectGND >= 2) {
-      print("burned");
-      vccConnectGND = 0;
+    /******* MCUVCC at blank 0 *******/
+
+    /******* IMUGND at blank 1 *******/
+    //先判斷位置1是否是空的
+    if (index == 1) {
+      blank1empty = true;
     }
+
+    //當IMUGND在第0格,第2格或第4格，第1格又是空的，那下一步，IMUGND必定在第1格！
+    if ("${numbers[index]} from $index" == "5 from 0" ||
+        "${numbers[index]} from $index" == "5 from 2" ||
+        "${numbers[index]} from $index" == "5 from 4") {
+      if (blank1empty) {
+        print("IMUGND at 1");
+        imuGndAt1 = true;
+      }
+    }
+    /******* IMUGND at blank 1 *******/
+
+    /******* PCB Burned *******/
+    if (mcuVccAt0 && imuGndAt1) {
+      print("PCB Burned");
+      checkBurned();
+      mcuVccAt0 = false;
+      imuGndAt1 = false;
+    }
+    /******* PCB Burned *******/
 
     if (index - 1 >= 0 && numbers[index - 1] == 0 && index % 3 != 0 ||
         index + 1 < 9 && numbers[index + 1] == 0 && (index + 1) % 3 != 0 ||
@@ -157,5 +187,46 @@ class _BoardState extends State<Board> {
             );
           });
     }
+  }
+
+  void checkBurned() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Container(
+              height: 200,
+              child: Padding(
+                padding: EdgeInsets.all(30.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Tips: When VCC and GND connected each other. It may cause PCB burned!!!",
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                    SizedBox(
+                      width: 220.0,
+                      child: RaisedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          "Close",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: Colors.blue,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 }
