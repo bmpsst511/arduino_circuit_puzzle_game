@@ -8,10 +8,10 @@ class MyTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size.height * 0.10,
+      height: size.height * 0.15,
       padding: EdgeInsets.all(5.0),
       child: Text(
-        "Sliding Puzzle",
+        "Learning Layout Tips from Sliding Puzzle",
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: size.height * 0.05,
