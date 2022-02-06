@@ -1,3 +1,4 @@
+import 'package:arduino_circuit_puzzle_game/Pages/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'Pages/board.dart';
@@ -18,7 +19,7 @@ class slidingPuzzle extends StatelessWidget {
     return MaterialApp(
       title: 'Sliding Puzzle',
       debugShowCheckedModeBanner: false,
-      home: Board(),
+      home: homePage(),
     );
   }
 }
