@@ -1,13 +1,12 @@
 import 'dart:async';
 
-import 'package:arduino_circuit_puzzle_game/widgets/grid.dart';
-import 'package:arduino_circuit_puzzle_game/widgets/menu.dart';
-import 'package:arduino_circuit_puzzle_game/widgets/mytitle.dart';
+import 'package:arduino_circuit_puzzle_game/widgets/PuzzleWidgets/grid.dart';
+import 'package:arduino_circuit_puzzle_game/widgets/PuzzleWidgets/menu.dart';
+import 'package:arduino_circuit_puzzle_game/widgets/PuzzleWidgets/mytitle.dart';
 import 'package:flutter/material.dart';
 
 class Board extends StatefulWidget {
   //const Board({Key? key}) : super(key: key);
-
   @override
   _BoardState createState() => _BoardState();
 }
@@ -38,25 +37,33 @@ class _BoardState extends State<Board> {
       });
     }
 
-    return SafeArea(
-      child: Container(
-        height: size.height,
-        color: Colors.blue,
-        child: Column(
-          children: <Widget>[
-            MyTitle(size),
-            Grid(numbers, size, clickGrid),
-            Menu(reset, move, secondsPassed, size),
-          ],
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Learning Layout Tips from Sliding Puzzle'),
         ),
-      ),
-    );
+        body: SafeArea(
+          child: Container(
+            height: size.height,
+            color: Colors.blue,
+            child: Column(
+              children: <Widget>[
+                MyTitle(size),
+                Grid(numbers, size, clickGrid),
+                Menu(reset, gohome, move, secondsPassed, size),
+              ],
+            ),
+          ),
+        ));
   }
 
   bool blank0empty = false;
   bool blank1empty = false;
   bool mcuVccAt0 = false;
   bool imuGndAt1 = false;
+
+  void gohome() {
+    Navigator.pop(context);
+  }
 
   void clickGrid(index) {
     if (secondsPassed == 0) {
