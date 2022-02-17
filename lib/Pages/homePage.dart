@@ -41,7 +41,7 @@ class _homePage extends StatelessWidget {
           RaisedButton(
             child: Text('Play'),
             onPressed: () {
-              playLocal();
+              //playLocal();
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Board()));
             },
@@ -50,7 +50,7 @@ class _homePage extends StatelessWidget {
           RaisedButton(
             child: Text("Pause"),
             onPressed: () {
-              stop();
+              //stop();
             },
           ),
         ],
