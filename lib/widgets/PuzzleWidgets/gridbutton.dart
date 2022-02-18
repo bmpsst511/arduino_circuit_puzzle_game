@@ -28,7 +28,8 @@ class GridButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('Block_${figureIndex}.png'), fit: BoxFit.cover),
+              image: AssetImage('assets/Block_${figureIndex}.png'),
+              fit: BoxFit.cover),
         ),
       ),
       // ),
