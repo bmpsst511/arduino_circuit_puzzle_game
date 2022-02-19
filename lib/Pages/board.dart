@@ -49,7 +49,7 @@ class _BoardState extends State<Board> {
               children: <Widget>[
                 MyTitle(size),
                 Grid(numbers, size, clickGrid),
-                Menu(reset, gohome, move, secondsPassed, size),
+                Menu(reset, move, secondsPassed, size),
               ],
             ),
           ),
@@ -60,10 +60,6 @@ class _BoardState extends State<Board> {
   bool blank1empty = false;
   bool mcuVccAt0 = false;
   bool imuGndAt1 = false;
-
-  void gohome() {
-    Navigator.pop(context);
-  }
 
   void clickGrid(index) {
     if (secondsPassed == 0) {
