@@ -7,11 +7,10 @@ import 'time.dart';
 
 class Menu extends StatelessWidget {
   Function() reset;
-  Function() gohome;
   int move;
   int secondsPassed;
   var size;
-  Menu(this.reset, this.gohome, this.move, this.secondsPassed, this.size);
+  Menu(this.reset, this.move, this.secondsPassed, this.size);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,12 @@ class Menu extends StatelessWidget {
           ResetButton(reset),
           Move(move),
           Time(secondsPassed),
-          GoHome(gohome),
+          RaisedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('Description'),
+          )
         ],
       ),
     );
