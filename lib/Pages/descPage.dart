@@ -26,37 +26,42 @@ class _descPage extends StatelessWidget {
           context, MaterialPageRoute(builder: (context) => homePage()));
     }
 
-    return ListView(
-      padding: const EdgeInsets.all(8),
-      children: <Widget>[
-        const ListTile(
-            title: Text(
-          "Task 1: Wemos D1 mini and BNO055 Layout",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-            color: Colors.black,
-            decoration: TextDecoration.none,
-          ),
-        )),
-        Card(
-          child: Image.asset('assets/Task_1.png'),
-        ),
-        ButtonBar(
-          alignment: MainAxisAlignment.spaceEvenly,
+    return Center(
+      child: Container(
+        height: 600,
+        child: ListView(
+          padding: const EdgeInsets.all(8),
           children: <Widget>[
-            RaisedButton(
-              onPressed: () {
-                //playLocal();
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Board()));
-              },
-              child: const Text('Go'),
+            const ListTile(
+                title: Text(
+              "Task 1: Wemos D1 mini and BNO055 Layout",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.black,
+                decoration: TextDecoration.none,
+              ),
+            )),
+            Card(
+              child: Image.asset('assets/Task_1.png'),
             ),
-            GoHome(gohome)
+            ButtonBar(
+              alignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                RaisedButton(
+                  onPressed: () {
+                    //playLocal();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Board()));
+                  },
+                  child: const Text('Go'),
+                ),
+                GoHome(gohome)
+              ],
+            )
           ],
-        )
-      ],
+        ),
+      ),
     );
   }
 }

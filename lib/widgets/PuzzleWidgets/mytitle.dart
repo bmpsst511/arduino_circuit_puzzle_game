@@ -11,7 +11,7 @@ class MyTitle extends StatelessWidget {
       height: size.height * 0.08,
       padding: EdgeInsets.all(5.0),
       child: Text(
-        "Task-1",
+        "Task 1",
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: size.height * 0.05,

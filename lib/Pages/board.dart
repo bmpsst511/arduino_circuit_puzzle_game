@@ -20,6 +20,7 @@ class _BoardState extends State<Board> {
   Timer? timer;
   static const duration = const Duration(seconds: 1);
   bool isActive = false;
+  bool once = false;
 
   @override
   void initState() {
@@ -193,43 +194,46 @@ class _BoardState extends State<Board> {
   }
 
   void checkBurned() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: Container(
-              height: 200,
-              child: Padding(
-                padding: EdgeInsets.all(30.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      "Tips: When VCC and GND connected each other. It may cause PCB burned!!!",
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                    SizedBox(
-                      width: 220.0,
-                      child: RaisedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          "Close",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        color: Colors.blue,
+    if (!once) {
+      once = true;
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: Container(
+                height: 200,
+                child: Padding(
+                  padding: EdgeInsets.all(30.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Tips: When VCC and GND connected each other. It may cause PCB burned!!!",
+                        style: TextStyle(fontSize: 20.0),
                       ),
-                    )
-                  ],
+                      SizedBox(
+                        width: 220.0,
+                        child: RaisedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            "Close",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          color: Colors.blue,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        });
+            );
+          });
+    }
   }
 }
