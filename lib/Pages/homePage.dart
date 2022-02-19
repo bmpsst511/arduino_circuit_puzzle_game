@@ -1,4 +1,5 @@
 import 'package:arduino_circuit_puzzle_game/Pages/board.dart';
+import 'package:arduino_circuit_puzzle_game/Pages/descPage.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
@@ -39,11 +40,11 @@ class _homePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           RaisedButton(
-            child: Text('Play'),
+            child: Text('Start'),
             onPressed: () {
               //playLocal();
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Board()));
+                  context, MaterialPageRoute(builder: (context) => descPage()));
             },
           ),
           SizedBox(width: 5),
